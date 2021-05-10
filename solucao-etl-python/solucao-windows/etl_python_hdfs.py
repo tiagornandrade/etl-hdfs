@@ -24,8 +24,8 @@ print('Definição das variáveis de tempo', '                         --      O
 # Parametros para a criação da string de conexão ao banco sql
 server = 'localhost'
 database = 'db_datasus'
-username = 'sa'
-password = 'Ribeiro83'
+username = 'dev'
+password = 'SenhaDev1234'
 
 # String de conexão ao banco sql
 conn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+password)
@@ -40,7 +40,7 @@ query = """SELECT [date]
                 ,[confirmed_per_100k_inhabitants] 
                 ,[death_rate] 
             FROM [db_datasus].[dbo].[COVID] 
-            WHERE city_ibge_code < 100 
+            WHERE city_ibge_code < 100 AND CONVERT(DATE, [date]) = CONVERT(DATE,GETDATE()-1)  
             GROUP BY  
                   [date] 
                   ,[state] 
